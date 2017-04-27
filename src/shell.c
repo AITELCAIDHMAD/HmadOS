@@ -1,18 +1,34 @@
 #include "../include/shell.h"
 
+ int nb=0;
+int j,last = 0;
+char * history[10];
+
+ void newCmd(char* cmd) {
+history[nb]=(char *)malloc(200);
+     history[last%10]=cmd;
+     last++;
+ }
+
+void listHistory(){
+    for(int i = last,  limit = 0; limit != nb ; i = (i -1)%nb , limit++){
+         print("\n ");
+         print(history[i]);
+        }
+
+}
+
+
+
 
 void launch_shell(int id_shell){
     string ch=(string )malloc (200);
     string ch2=(string )malloc (200);
 
     int counter=0;char loginSucceful='N';
-    string command=(string )malloc (200);
-    string history[10];
 
-    int j,nb=0;
-    for(j=0;j<10;j++){
-        history[j]=(string )malloc (200);
-    }
+
+
 j=0;
 
  do{
@@ -35,8 +51,9 @@ j=0;
       if(nb>=10) nb=0;
             print2(" >> root@HP :~$ ");
             ch=readStr(ch);
+            newCmd(ch);
+
          //store the history
-            memory_copy( history[nb],ch,strlength(ch));
 
             if(strcompare(ch,"cmd")){
                 print("\n open new shell "); id_shell++; string c=int_to_string(id_shell);print(c);
@@ -54,10 +71,7 @@ j=0;
 
 
             else if (strcompare(ch,"history")){
-                for(j=nb;j>=0;j--){
-                    print("\n");
-                 	print(history[j]);
-                                   }
+listHistory();
             }
             else if (strcompare(ch,"echo")){
                     echo();nb++;
@@ -96,7 +110,7 @@ j=0;
                     man_history();nb++;
             }
             else if (strcompare(ch,"man min")){
-                    man_min();
+                    man_min();nb++;
             }
             else if (strcompare(ch,"man max")){
                     man_max();nb++;
@@ -105,7 +119,7 @@ j=0;
                     man_upper();nb++;
             }
             else if (strcompare(ch,"man split")){
-                    man_split();
+                    man_split();nb++;
             }
             else if (strcompare(ch,"man avg")){
                     man_avg();nb++;
