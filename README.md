@@ -8,6 +8,14 @@ and how to make a mini OS .
 
 
 you can download the project using git 
-https://github.com/hamidpro/HmadOS.git
+
+1) https://github.com/hamidpro/HmadOS.git
+2) unzip the directory
+3) download quemu from http://www.qemu.org/download/
+4) open line-command and go the path of this directory
+5) use " make run" to run this os using qemu
+6) logging is root and password is root
+7) use help command 
+
 
 
